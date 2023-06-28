@@ -1,30 +1,17 @@
 openapi: '3.0.0'
 info:
-  version: '1.0.0'
+  version: '0.0.1'
   title: 'WanderSnap API'
   description: This API is used by the WanderSnap iOS App
-
+servers:
+  - url: https://api-staging.wandersnap.app/api
+    description: Staging Sever
+  - url: https://api.wandersnap.app/api
+    description: Production Server
 paths:
-  /api/auth/register:
-    parameters:
-      - name: name
-        description: The full name of the user registering to use the application
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/name'
-      - name: email
-        description: The email address of the user registering to use the application
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/email'
-      - name: password
-        description: The password of the user registering to use the application
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/email'
+  /auth/register:
+    requestBody:
+      $ref: '#/components/requestBodies/RegisterBody'
     post:
       summary: register for the application
       responses:
@@ -47,25 +34,11 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error'
 components:
-  schemas:
-    name:
-      description: The full name of the user
-      type: string
-    email:
-      description: The email address of the user
-      type: string
-    Error:
-      type: object
-      required:
-        - message
-      properties:
-        message:
-          description: A human readable error message
-          type: string
-  securitySchemes:
-    ApiKey:
-      type: apiKey
-      in: header
-      name: X-Api-Key
-security:
-  - ApiKey: []
+  requestBodies:
+    RegisterBody:
+      description: The JSON body for the request
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pet'
