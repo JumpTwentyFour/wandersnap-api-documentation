@@ -1,0 +1,399 @@
+{
+	"info": {
+		"_postman_id": "804fc1c1-74be-4f84-99e1-6b6864c770f2",
+		"name": "WanderSnap API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_uid": "85375-804fc1c1-74be-4f84-99e1-6b6864c770f2"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"id": "43955e98-4443-4bb7-bf88-0b4ff1d4fba1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true,
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"{{$randomFullName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"{{$randomPassword}}\",\n    \"device_name\": \"{{$randomWord}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_uri}}/api/auth/register",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "232a4931-0507-4b35-b5a9-8ada14788b4c",
+							"name": "Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "{{$randonFullName}}",
+											"description": "(required) The Full name of the user registering for the aplication",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "{{$randomEmail}}",
+											"description": "(required) The email address being used to register to use for the application",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "{{$randomPassword}}",
+											"description": "(required) The password to use to login to the system",
+											"type": "text"
+										},
+										{
+											"key": "device_name",
+											"value": "{{$randomWord}}",
+											"description": "(required) A randomly generated name to be associated with the device",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_uri}}/api/auth/register",
+									"host": [
+										"{{base_uri}}"
+									],
+									"path": [
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.25.0"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.7"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 28 Jun 2023 19:46:02 GMT"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The name field is required. (and 3 more errors)\",\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ],\n        \"device_name\": [\n            \"The device name field is required.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2a4ff97f-0a63-4f12-afa4-ed4cafc6a1a0",
+								"exec": [
+									"var email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+									"",
+									"const registerRequestObject={",
+									"  url: pm.environment.get('base_uri') + \"/api/auth/register\",",
+									"  method: \"POST\",",
+									"  body: {",
+									"      mode: 'application/json',",
+									"      raw: pm.variables.replaceIn(JSON.stringify({",
+									"            'email': email,",
+									"            'password': 'abc123456123',",
+									"            'device_name': 'testerdevice',",
+									"            'name': 'Daniel'",
+									"       })),",
+									"      ",
+									"  },",
+									"  header: {",
+									"      'Content-Type': 'application/json',",
+									"      'Accept': 'application/json',",
+									"  }",
+									"};",
+									"",
+									"pm.sendRequest(registerRequestObject, function (err, response) {",
+									"  if (response.code === 201) {",
+									"    pm.environment.set(\"temporaryEmail\", email);",
+									"  }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "e48e7bcc-37c0-4817-aaa7-de7871e89823",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"{{temporaryEmail}}\",\n    \"password\": \"abc123456123\",\n    \"device_name\": \"{{$randomWord}}\"\n}"
+						},
+						"url": {
+							"raw": "{{base_uri}}/api/auth/login",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "a3b17bef-f661-4815-aa36-c7ab395eda92"
+		},
+		{
+			"name": "Trips",
+			"item": [
+				{
+					"name": "Store",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8dce0f45-c318-4f88-8060-ff1db5e6d9c0",
+								"exec": [
+									"var email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+									"",
+									"const registerRequestObject={",
+									"  url: pm.environment.get('base_uri') + \"/api/auth/register\",",
+									"  method: \"POST\",",
+									"  body: {",
+									"      mode: 'application/json',",
+									"      raw: pm.variables.replaceIn(JSON.stringify({",
+									"            'email': email,",
+									"            'password': 'abc123456123',",
+									"            'device_name': 'testerdevice',",
+									"            'name': 'Daniel'",
+									"       })),",
+									"      ",
+									"  },",
+									"  header: {",
+									"      'Content-Type': 'application/json',",
+									"      'Accept': 'application/json',",
+									"  }",
+									"};",
+									"",
+									"pm.sendRequest(registerRequestObject, function (err, response) {",
+									"  if (response.code === 201) {",
+									"    pm.environment.set(\"temporaryAuthToken\", response.json().token);",
+									"  }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "bb9a9f74-16d5-4fca-a894-6c0016e3b18c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{temporaryAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Tester Trip\",\n    \"start_date\": \"2022-01-01 00:00:00\",\n    \"end_date\":  \"2022-04-01 00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_uri}}/api/trips",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"trips"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Trips",
+					"id": "c53c6c5e-1773-45c1-a864-59e94391cf4f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_uri}}/api/trips",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"trips"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"id": "b14d1cd3-5528-4a09-8823-cc6832d756f9"
+		},
+		{
+			"name": "Ping",
+			"id": "79437729-912e-494a-b396-640cb3ff06cc",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_uri}}/api/ping",
+					"host": [
+						"{{base_uri}}"
+					],
+					"path": [
+						"api",
+						"ping"
+					]
+				},
+				"description": "This endpoint has been developed to allow you to quickly check that the API is still up and running. You can use this endpoint as a status endpoint to confirm things are still running"
+			},
+			"response": []
+		}
+	]
+}
