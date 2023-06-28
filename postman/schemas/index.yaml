@@ -15,25 +15,31 @@ paths:
     post:
       summary: register for the application
       responses:
-        '200':
-          description: The spacecraft corresponding to the provided `spacecraftId`
+        '201':
+          description: The created response when a user is successfully registered
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/name'
-        404:
-          description: No spacecraft found for the provided `spacecraftId`
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        500:
-          description: Unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Register'
+
 components:
+  schemas:
+    Register:
+      type: object
+      required:
+        - email
+        - password
+        - device_name
+        - name
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        device_name:
+          type: string
   requestBodies:
     RegisterBody:
       description: The JSON body for the request
@@ -41,4 +47,15 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Pet'
+            type: object
+            required:
+              - username
+            properties:
+              artist_name:
+                type: string
+              artist_genre:
+                type: string
+              albums_recorded:
+                type: integer
+              username:
+                type: string
