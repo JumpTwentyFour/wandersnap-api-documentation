@@ -49,13 +49,16 @@ components:
           schema:
             type: object
             required:
-              - username
+              - email
+              - password
+              - device_name
+              - name
             properties:
-              artist_name:
+              name:
                 type: string
-              artist_genre:
+              email:
                 type: string
-              albums_recorded:
-                type: integer
-              username:
+              password:
+                type: string
+              device_name:
                 type: string
