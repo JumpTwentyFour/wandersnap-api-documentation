@@ -58,6 +58,7 @@
 								"header": [
 									{
 										"key": "Content-Type",
+										"name": "Content-Type",
 										"value": "application/json",
 										"type": "text"
 									},
@@ -68,33 +69,13 @@
 									}
 								],
 								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "name",
-											"value": "{{$randonFullName}}",
-											"description": "(required) The Full name of the user registering for the aplication",
-											"type": "text"
-										},
-										{
-											"key": "email",
-											"value": "{{$randomEmail}}",
-											"description": "(required) The email address being used to register to use for the application",
-											"type": "text"
-										},
-										{
-											"key": "password",
-											"value": "{{$randomPassword}}",
-											"description": "(required) The password to use to login to the system",
-											"type": "text"
-										},
-										{
-											"key": "device_name",
-											"value": "{{$randomWord}}",
-											"description": "(required) A randomly generated name to be associated with the device",
-											"type": "text"
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"{{$randomFullName}}\",\n    \"password\": \"{{$randomPassword}}\",\n    \"device_name\": \"{{$randomWord}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
 										}
-									]
+									}
 								},
 								"url": {
 									"raw": "{{base_uri}}/api/auth/register",
@@ -154,7 +135,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"The name field is required. (and 3 more errors)\",\n    \"errors\": {\n        \"name\": [\n            \"The name field is required.\"\n        ],\n        \"email\": [\n            \"The email field is required.\"\n        ],\n        \"password\": [\n            \"The password field is required.\"\n        ],\n        \"device_name\": [\n            \"The device name field is required.\"\n        ]\n    }\n}"
+							"body": "{\n    \"message\": \"The name field is required. (and 3 more errors)\",\n    \"errors\": {\n        \"email\": [\n            \"The email field is required.\"\n        ],\n    }\n}"
 						},
 						{
 							"id": "c2b90cfa-2aa2-4ab3-b2e1-aae41e779f10",
