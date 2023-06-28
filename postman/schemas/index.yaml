@@ -5,16 +5,28 @@ info:
   description: This API is used by the WanderSnap iOS App
 
 paths:
-  /spacecrafts/{spacecraftId}:
+  /api/auth/register:
     parameters:
-      - name: spacecraftId
-        description: The unique identifier of the spacecraft
+      - name: name
+        description: The full name of the user registering to use the application
         in: path
         required: true
         schema:
-          $ref: '#/components/schemas/SpacecraftId'
-    get:
-      summary: Read a spacecraft
+          $ref: '#/components/schemas/name'
+      - name: email
+        description: The email address of the user registering to use the application
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/email'
+      - name: password
+        description: The password of the user registering to use the application
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/email'
+    post:
+      summary: register for the application
       responses:
         '200':
           description: The spacecraft corresponding to the provided `spacecraftId`
@@ -36,8 +48,11 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    SpacecraftId:
-      description: The unique identifier of a spacecraft
+    name:
+      description: The full name of the user
+      type: string
+    email:
+      description: The email address of the user
       type: string
     Spacecraft:
       type: object
