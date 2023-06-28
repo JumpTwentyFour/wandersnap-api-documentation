@@ -15,5 +15,8 @@ files[] = {"id":"85375-804fc1c1-74be-4f84-99e1-6b6864c770f2","path":"WanderSnap 
 
 [config.relations.apiDefinition]
 rootDirectory = postman/schemas
+files[] = {"path":"index.yaml","metaData":{}}
 
 [config.relations.apiDefinition.metaData]
+type = openapi:3
+rootFiles[] = index.yaml
