@@ -33,7 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Spacecraft'
+                $ref: '#/components/schemas/name'
         404:
           description: No spacecraft found for the provided `spacecraftId`
           content:
@@ -54,27 +54,6 @@ components:
     email:
       description: The email address of the user
       type: string
-    Spacecraft:
-      type: object
-      required:
-        - id
-        - name
-        - type
-      properties:
-        id:
-          $ref: '#/components/schemas/SpacecraftId'
-        name:
-          type: string
-        type:
-          type: string
-          enum:
-            - capsule
-            - probe
-            - satellite
-            - spaceplane
-            - station
-        description:
-          type: string
     Error:
       type: object
       required:
