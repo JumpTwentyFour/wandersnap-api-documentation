@@ -16,13 +16,17 @@ paths:
         $ref: '#/components/requestBodies/RegisterBody'
       responses:
         '201':
-          description: The created response when a user is successfully registered
+          description: Created
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Register'
 
 components:
+  securitySchemes:
+    bearerAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
   schemas:
     Register:
       type: object
@@ -56,9 +60,13 @@ components:
             properties:
               name:
                 type: string
+                example: "Joe Blogs"
               email:
                 type: string
+                example: "joe@example.com"
               password:
                 type: string
+                example: "thebestpasswordever"
               device_name:
                 type: string
+                example: "somedevice"
