@@ -1,4 +1,4 @@
-openapi: '3.0.0'
+openapi: '3.0.3'
 info:
   version: '0.0.1'
   title: 'WanderSnap API'
@@ -10,10 +10,10 @@ servers:
     description: Production Server
 paths:
   /auth/register:
-    requestBody:
-      $ref: '#/components/requestBodies/RegisterBody'
     post:
       summary: register for the application
+      requestBody:
+        $ref: '#/components/requestBodies/RegisterBody'
       responses:
         '201':
           description: The created response when a user is successfully registered
