@@ -11,6 +11,8 @@ servers:
 paths:
     /ping:
         get:
+            tags:
+                - Ping
             summary: A ping endpoint to show the API is still running
             responses:
                 200:
@@ -21,6 +23,8 @@ paths:
                                 $ref: "#/components/schemas/Ping"
     /auth/register:
         post:
+            tags:
+                - Auth
             summary: register for the application
             requestBody:
                 $ref: "#/components/requestBodies/RegisterBody"
@@ -34,6 +38,8 @@ paths:
 
     /auth/login:
         post:
+            tags:
+                - Auth
             summary: register for the application
             requestBody:
                 $ref: "#/components/requestBodies/RegisterBody"
