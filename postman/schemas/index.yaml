@@ -50,6 +50,12 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Register"
+    /trips:
+        get:
+            tags:
+                - Trips
+            summary: returns a list of all the current trips of a user
+
 components:
     securitySchemes:
         bearerAuth: # arbitrary name for the security scheme
