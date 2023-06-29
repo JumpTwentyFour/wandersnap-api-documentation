@@ -30,19 +30,8 @@ components:
     schemas:
         Register:
             type: object
-            required:
-                - email
-                - password
-                - device_name
-                - name
             properties:
-                name:
-                    type: string
-                email:
-                    type: string
-                password:
-                    type: string
-                device_name:
+                token:
                     type: string
     requestBodies:
         RegisterBody:
