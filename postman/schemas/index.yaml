@@ -1,72 +1,72 @@
-openapi: '3.0.3'
+openapi: "3.0.3"
 info:
-  version: '0.0.1'
-  title: 'WanderSnap API'
-  description: This API is used by the WanderSnap iOS App
+    version: "0.0.1"
+    title: "WanderSnap API"
+    description: This API is used by the WanderSnap iOS App
 servers:
-  - url: https://api-staging.wandersnap.app/api
-    description: Staging Sever
-  - url: https://api.wandersnap.app/api
-    description: Production Server
+    - url: https://api-staging.wandersnap.app/api
+      description: Staging Sever
+    - url: https://api.wandersnap.app/api
+      description: Production Server
 paths:
-  /auth/register:
-    post:
-      summary: register for the application
-      requestBody:
-        $ref: '#/components/requestBodies/RegisterBody'
-      responses:
-        '201':
-          description: Created
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Register'
+    /auth/register:
+        post:
+            summary: register for the application
+            requestBody:
+                $ref: "#/components/requestBodies/RegisterBody"
+            responses:
+                "201":
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Register"
 
 components:
-  securitySchemes:
-    bearerAuth: # arbitrary name for the security scheme
-      type: http
-      scheme: bearer
-  schemas:
-    Register:
-      type: object
-      required:
-        - email
-        - password
-        - device_name
-        - name
-      properties:
-        name:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
-        device_name:
-          type: string
-  requestBodies:
-    RegisterBody:
-      description: The JSON body for the request
-      required: true
-      content:
-        application/json:
-          schema:
+    securitySchemes:
+        bearerAuth: # arbitrary name for the security scheme
+            type: http
+            scheme: bearer
+    schemas:
+        Register:
             type: object
             required:
-              - email
-              - password
-              - device_name
-              - name
+                - email
+                - password
+                - device_name
+                - name
             properties:
-              name:
-                type: string
-                example: "Joe Blogs"
-              email:
-                type: string
-                example: "joe@example.com"
-              password:
-                type: string
-                example: "thebestpasswordever"
-              device_name:
-                type: string
-                example: "somedevice"
+                name:
+                    type: string
+                email:
+                    type: string
+                password:
+                    type: string
+                device_name:
+                    type: string
+    requestBodies:
+        RegisterBody:
+            description: The JSON body for the request
+            required: true
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        required:
+                            - email
+                            - password
+                            - device_name
+                            - name
+                        properties:
+                            name:
+                                type: string
+                                example: "Joe Blogs"
+                            email:
+                                type: string
+                                example: "joe@example.com"
+                            password:
+                                type: string
+                                example: "thebestpasswordever"
+                            device_name:
+                                type: string
+                                example: "somedevice"
