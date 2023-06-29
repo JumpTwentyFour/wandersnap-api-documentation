@@ -9,7 +9,30 @@ servers:
     - url: https://api.wandersnap.app/api
       description: Production Server
 paths:
+    /ping:
+        get:
+            summary: A ping endpoint to show the API is still running
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Ping"
     /auth/register:
+        post:
+            summary: register for the application
+            requestBody:
+                $ref: "#/components/requestBodies/RegisterBody"
+            responses:
+                201:
+                    description: Created
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Register"
+
+    /auth/login:
         post:
             summary: register for the application
             requestBody:
@@ -21,7 +44,6 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Register"
-
 components:
     securitySchemes:
         bearerAuth: # arbitrary name for the security scheme
@@ -33,6 +55,16 @@ components:
             properties:
                 token:
                     type: string
+        Ping:
+            type: object
+            properties:
+                service:
+                    type: string
+                    example: "Wandersnap API - Staging"
+                timestamp:
+                    type: string
+                    example: "2023-06-29 06:24:01"
+
     requestBodies:
         RegisterBody:
             description: The JSON body for the request
