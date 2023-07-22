@@ -64,6 +64,14 @@ paths:
 
     /trips/{tripId}:
         get:
+            parameters:
+                - in: path
+                  name: tripId
+                  schema:
+                      type: string
+                      required: true
+                  description: The trip ID to retrieve
+                  example: 01ARZ3NDEKTSV4RRFFQ69G5FAV
             tags:
                 - Trips
             responses:
