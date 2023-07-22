@@ -57,11 +57,43 @@ paths:
             summary: returns a list of all the current trips of a user
             responses:
                 200:
+        post:
+            tags:
+                - Trips
+            responses:
+            summary: Creates a new trip
+
+    /trips/{tripId}:
+        get:
+            parameters:
+                - in: path
+                  name: tripId
+                  required: true
+                  schema:
+                      type: string
+                  description: The trip ID to retrieve
+                  example: 01ARZ3NDEKTSV4RRFFQ69G5FAV
+            tags:
+                - Trips
+            responses:
+                "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: "#/components/schemas/PaginatedTripResponse"
+                                $ref: "#/components/schemas/Trip"
+                "403":
+                    description: Forbidden
+            summary: retrieves a single trip by its ID, this endpoint is scoped to the current user so if a user doesnt own the trip
+                    it wont return a trip even if the ID is valid
+
+
+        delete:
+            tags:
+                - Trips
+            responses:
+            summary: deletes a users trip
+
 components:
     securitySchemes:
         bearerAuth: # arbitrary name for the security scheme
@@ -82,7 +114,16 @@ components:
                 timestamp:
                     type: string
                     example: "2023-06-29 06:24:01"
-        PaginatedTripResponse
+        Trip:
+            type: object
+            properties:
+                service:
+                    type: string
+                    example: "Wandersnap API - Staging"
+                timestamp:
+                    type: string
+                    example: "2023-06-29 06:24:01"
+
     requestBodies:
         RegisterBody:
             description: The JSON body for the request
