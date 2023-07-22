@@ -54,7 +54,28 @@ paths:
         get:
             tags:
                 - Trips
+            responses:
             summary: returns a list of all the current trips of a user
+        post:
+            tags:
+                - Trips
+            responses:
+            summary: Creates a new trip
+
+    /trips/{tripId}:
+        get:
+            tags:
+                - Trips
+            responses:
+            summary: retrieves a single trip by its ID, this endpoint is scoped to the current user so if a user doesnt own the trip
+                    it wont return a trip even if the ID is valid
+
+
+        delete:
+            tags:
+                - Trips
+            responses:
+            summary: deletes a users trip
 
 components:
     securitySchemes:
