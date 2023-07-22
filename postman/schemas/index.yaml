@@ -67,9 +67,9 @@ paths:
             parameters:
                 - in: path
                   name: tripId
+                  required: true
                   schema:
                       type: string
-                      required: true
                   description: The trip ID to retrieve
                   example: 01ARZ3NDEKTSV4RRFFQ69G5FAV
             tags:
