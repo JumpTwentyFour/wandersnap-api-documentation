@@ -44,7 +44,7 @@ paths:
             requestBody:
                 $ref: "#/components/requestBodies/RegisterBody"
             responses:
-                "201":
+                201:
                     description: Created
                     content:
                         application/json:
@@ -55,7 +55,13 @@ paths:
             tags:
                 - Trips
             summary: returns a list of all the current trips of a user
-
+            responses:
+                200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/PaginatedTripResponse"
 components:
     securitySchemes:
         bearerAuth: # arbitrary name for the security scheme
@@ -76,7 +82,7 @@ components:
                 timestamp:
                     type: string
                     example: "2023-06-29 06:24:01"
-
+        PaginatedTripResponse
     requestBodies:
         RegisterBody:
             description: The JSON body for the request
