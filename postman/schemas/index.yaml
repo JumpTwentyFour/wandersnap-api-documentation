@@ -75,6 +75,14 @@ paths:
             tags:
                 - Trips
             responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Trip"
+                "403":
+                    description: Forbidden
             summary: retrieves a single trip by its ID, this endpoint is scoped to the current user so if a user doesnt own the trip
                     it wont return a trip even if the ID is valid
 
@@ -97,6 +105,15 @@ components:
                 token:
                     type: string
         Ping:
+            type: object
+            properties:
+                service:
+                    type: string
+                    example: "Wandersnap API - Staging"
+                timestamp:
+                    type: string
+                    example: "2023-06-29 06:24:01"
+        Trip:
             type: object
             properties:
                 service:
