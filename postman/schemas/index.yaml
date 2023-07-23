@@ -115,6 +115,8 @@ paths:
             tags:
                 - Trips
             responses:
+                "204":
+                    description: The resource was deleted successfully.
             summary: deletes a users trip
 
 components:
