@@ -117,6 +117,9 @@ components:
         Trip:
             type: object
             properties:
+                id:
+                    type: string
+                    example: "01ARZ3NDEKTSV4RRFFQ69G5FAV"
                 name:
                     type: string
                     example: "South Wales 2023"
@@ -124,6 +127,15 @@ components:
                     type: string
                     example: "2023-06-29 06:24:01"
                 end_date:
+                    type: string
+                    example: "2023-06-29 06:24:01"
+                cover_photo:
+                    type: string
+                    example: "/img.jpg"
+                created_at:
+                    type: string
+                    example: "2023-06-29 06:24:01"
+                updated_at:
                     type: string
                     example: "2023-06-29 06:24:01"
 
