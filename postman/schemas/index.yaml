@@ -73,6 +73,21 @@ paths:
                       type: string
                   description: The trip ID to retrieve
                   example: 01ARZ3NDEKTSV4RRFFQ69G5FAV
+                - in: query
+                  name: include
+                  required: false
+                  schema:
+                      type: string
+                      enum:
+                          - owner
+                          - image
+                  examples:
+                      singleInclude:
+                          summary: Example of a single include
+                          value: "owner"   # ?include=owner
+                      multipleIncludes:
+                          summary: Example of multiple includes
+                          value: "owner,image"   # ?include=owner,image
             tags:
                 - Trips
             responses:
