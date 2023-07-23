@@ -211,7 +211,6 @@ components:
                 message:
                     type: string
             required:
-                - code
                 - message
     requestBodies:
         RegisterBody:
