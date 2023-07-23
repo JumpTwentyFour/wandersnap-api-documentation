@@ -97,8 +97,13 @@ paths:
                         application/json:
                             schema:
                                 $ref: "#/components/schemas/Trip"
+                "401":
+                    $ref: '#/components/responses/Unauthorized'
                 "403":
-                    description: Forbidden
+                    $ref: '#/components/responses/Forbidden'
+                "404":
+                    $ref: '#/components/responses/NotFound'
+
             summary: retrieves a single trip by its ID, this endpoint is scoped to the current user so if a user doesnt own the trip
                     it wont return a trip even if the ID is valid
 
@@ -117,9 +122,32 @@ paths:
             responses:
                 "204":
                     description: The resource was deleted successfully.
+                "401":
+                    $ref: '#/components/responses/Unauthorized'
+                "404":
+                    $ref: '#/components/responses/NotFound'
             summary: deletes a users trip
 
 components:
+    responses:
+        NotFound:
+            description: The specified resource was not found
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+        Forbidden:
+            description: The specified resource is forbidden
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
+        Unauthorized:
+            description: Unauthorized
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Error"
     securitySchemes:
         bearerAuth: # arbitrary name for the security scheme
             type: http
@@ -163,7 +191,16 @@ components:
                 updated_at:
                     type: string
                     example: "2023-06-29 06:24:01"
-
+        Error:
+            type: object
+            properties:
+                code:
+                    type: string
+                message:
+                    type: string
+            required:
+                - code
+                - message
     requestBodies:
         RegisterBody:
             description: The JSON body for the request
@@ -190,3 +227,4 @@ components:
                             device_name:
                                 type: string
                                 example: "somedevice"
+
