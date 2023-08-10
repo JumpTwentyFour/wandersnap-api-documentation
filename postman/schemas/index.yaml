@@ -57,6 +57,12 @@ paths:
             summary: returns a list of all the current trips of a user
             responses:
                 200:
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Trip"
+
         post:
             tags:
                 - Trips
@@ -123,7 +129,7 @@ paths:
                   required: true
                   schema:
                       type: string
-                  description: The trip ID to retrieve
+                  description: The trip ID to delete
                   example: 01ARZ3NDEKTSV4RRFFQ69G5FAV
             tags:
                 - Trips
