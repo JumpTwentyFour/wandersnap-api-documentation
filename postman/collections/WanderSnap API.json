@@ -70,7 +70,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\" : \"{{$randomFullName}}\",\n    \"password\": \"{{$randomPassword}}\",\n    \"device_name\": \"{{$randomWord}}\"\n}",
+									"raw": "{\n    \"name\" : \"Gene Ziemann\",\n    \"password\": \"QE_BFhKPNda69gk\",\n    \"device_name\": \"withdrawal\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -78,9 +78,12 @@
 									}
 								},
 								"url": {
-									"raw": "{{base_uri}}/api/auth/register",
+									"raw": "https://wandersnap-api.co.uk/api/auth/register",
+									"protocol": "https",
 									"host": [
-										"{{base_uri}}"
+										"wandersnap-api",
+										"co",
+										"uk"
 									],
 									"path": [
 										"api",
@@ -419,9 +422,37 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Trip",
+					"id": "228c53a4-e8f6-496c-be65-d988bdc42775",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_uri}}/api/trips/{{tripdId}}",
+							"host": [
+								"{{base_uri}}"
+							],
+							"path": [
+								"api",
+								"trips",
+								"{{tripdId}}"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"id": "b14d1cd3-5528-4a09-8823-cc6832d756f9"
+		},
+		{
+			"name": "Locations",
+			"item": [],
+			"id": "52a1b8fb-ef15-4527-bd44-1c6138663851"
 		},
 		{
 			"name": "Ping",
