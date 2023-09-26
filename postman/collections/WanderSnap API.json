@@ -425,11 +425,59 @@
 				},
 				{
 					"name": "Delete Trip",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "ead8a472-e0af-4f4e-b35c-8f0895224852",
+								"exec": [
+									"var email = pm.variables.replaceIn(\"{{$randomEmail}}\");",
+									"",
+									"const registerRequestObject={",
+									"  url: pm.environment.get('base_uri') + \"/api/auth/register\",",
+									"  method: \"POST\",",
+									"  body: {",
+									"      mode: 'application/json',",
+									"      raw: pm.variables.replaceIn(JSON.stringify({",
+									"            'email': email,",
+									"            'password': 'abc123456123',",
+									"            'device_name': 'testerdevice',",
+									"            'name': 'Daniel'",
+									"       })),",
+									"      ",
+									"  },",
+									"  header: {",
+									"      'Content-Type': 'application/json',",
+									"      'Accept': 'application/json',",
+									"  }",
+									"};",
+									"",
+									"pm.sendRequest(registerRequestObject, function (err, response) {",
+									"  if (response.code === 201) {",
+									"    pm.environment.set(\"temporaryAuthToken\", response.json().token);",
+									"  }",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"id": "228c53a4-e8f6-496c-be65-d988bdc42775",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{temporaryAuthToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
